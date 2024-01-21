@@ -6,7 +6,7 @@ export default function EventHandling() {
   const inputBox = useRef();
 
   function handleClick() {
-    setText(`Hello nigga ${inputBox.value}`);
+    setText(`Hello nigga ${inputBox.current.value}`);
   }
 
   function white() {

@@ -10,34 +10,23 @@ export default function Form() {
   const { fName: ngan, lName: apilido, email: emilyano } = userDetails;
 
   function handleFirstName(e) {
-    const firstName = e.target.value;
-
     setUserDetails((prevState) => {
-      return {
-        fName: firstName,
-        lName: prevState.lName,
-        email: prevState.email,
-      };
+      return { ...prevState, fName: e.target.value };
     });
   }
 
   function handleSurname(e) {
-    const surname = e.target.value;
     setUserDetails((prevState) => {
-      return { fName: prevState.fName, lName: surname, email: prevState.email };
+      return { ...prevState, lName: e.target.value };
     });
   }
-  console.log(userDetails);
 
   function handleEmail(e) {
     setUserDetails((prevState) => {
-      return {
-        fName: prevState.fName,
-        lName: prevState.lName,
-        email: e.target.value,
-      };
+      return { ...prevState, email: e.target.value };
     });
   }
+  console.log(userDetails);
 
   function displayName(e) {}
 

@@ -14,6 +14,12 @@ export default function TodoList() {
     setTodo(e.target.value);
   }
 
+  function addTodoKeyDown(e) {
+    if (e.key == "Enter") {
+      addTodo();
+    }
+  }
+
   function deleteTask(e) {
     const taskToDelete = e.target.getAttribute("data-name");
     const upatedTasks = tasks.filter((value) => value.name !== taskToDelete);
@@ -25,8 +31,6 @@ export default function TodoList() {
     if (!todo.trim()) {
       alert("Please input a task");
     } else {
-      console.log(`${todo} added to list`); //logging the name of the recently added task
-
       setTasks((prevState) => {
         return [...prevState, { name: todo, isDone: false }];
       });
@@ -34,7 +38,11 @@ export default function TodoList() {
     setTodo("");
     inputRef.current.focus();
   }
-  console.log(todo);
+
+  function markAsDone(e) {
+    console.log(e.target);
+  }
+
   console.log(tasks);
 
   return (
@@ -49,6 +57,7 @@ export default function TodoList() {
           value={todo}
           onChange={(e) => addTodoInput(e)}
           ref={inputRef}
+          onKeyDown={(e) => addTodoKeyDown(e)}
         />
         <button
           onClick={addTodo}
@@ -57,7 +66,11 @@ export default function TodoList() {
           Add
         </button>
       </div>
-      <ListItems tasks={tasks} deleteTask={deleteTask} />
+      <ListItems
+        tasks={tasks}
+        deleteTask={deleteTask}
+        markAsDone={markAsDone}
+      />
     </div>
   );
 }

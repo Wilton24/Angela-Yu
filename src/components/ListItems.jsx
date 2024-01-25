@@ -1,11 +1,18 @@
 import List from "./ui/List.jsx";
 
-export default function ListItems({ tasks, deleteTask }) {
+export default function ListItems({ tasks, deleteTask, markAsDone }) {
   return (
     <div className="mt-3 ms-3">
       <ul className="shit">
         {tasks.map((task, index) => {
-          return <List task={task} key={index} deleteTask={deleteTask} />;
+          return (
+            <List
+              task={task}
+              key={index}
+              deleteTask={deleteTask}
+              markAsDone={markAsDone}
+            />
+          );
         })}
       </ul>
     </div>

@@ -17,4 +17,10 @@ const cars = [
   },
 ];
 
+const todo = [
+  {
+    name: "",
+    isDone: false,
+  },
+];
 export { cars };

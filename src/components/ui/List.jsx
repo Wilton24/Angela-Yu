@@ -1,22 +1,17 @@
 import x from "/xmark-solid.svg";
 
-export default function List({ task, deleteTask, markAsDone }) {
-  let listClassName =
-    "text-black block w-full cursor-pointer hover:bg-slate-300 hover:shadow-lg rounded-md px-1";
-
-  if (task.isDone) {
-    listClassName =
-      "text-black block w-full cursor-pointer hover:bg-slate-300 hover:shadow-lg rounded-md px-1 line-through";
-  } else {
-    listClassName =
-      "text-black block w-full cursor-pointer hover:bg-slate-300 hover:shadow-lg rounded-md px-1";
-  }
+export default function List({ task, deleteTask, markDone }) {
+  let classname = !task.isDone
+    ? "text-black block w-full cursor-pointer hover:bg-slate-300 hover:shadow-lg rounded-md px-1"
+    : "text-black block w-full cursor-pointer hover:bg-slate-300 hover:shadow-lg rounded-md px-1 line-through";
 
   return (
     <div className="flex justify-between">
       <li
-        className={listClassName}
-        onClick={(e) => markAsDone(e)}
+        className={classname}
+        onClick={() => {
+          markDone(task.name, task.isDone);
+        }}
       >
         {task.name}
       </li>

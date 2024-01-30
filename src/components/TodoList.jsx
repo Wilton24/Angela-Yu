@@ -4,15 +4,9 @@ import ListItems from "./ListItems";
 export default function TodoList() {
   const [todo, setTodo] = useState("");
   const [tasks, setTasks] = useState([]);
+  const [availableTasks, setAvailableTasks] = useState();
 
   const inputRef = useRef(undefined);
-
-  function addTodoInput(e) {
-    // setTodo((prevState) => {
-    //   return { ...prevState, name: e.target.value };
-    // });
-    setTodo(e.target.value);
-  }
 
   function addTodoKeyDown(e) {
     if (e.key == "Enter") {
@@ -39,8 +33,16 @@ export default function TodoList() {
     inputRef.current.focus();
   }
 
-  function markAsDone(e) {
-    console.log(e.target);
+  function markDone(name, status) {
+    const updatedTasks = tasks.map((element, index) => {
+      if (name == element.name) {
+        return { ...element, isDone: !status };
+      }
+      return element;
+    });
+
+    setTasks(updatedTasks);
+    updateAvailableTasks();
   }
 
   console.log(tasks);
@@ -55,7 +57,7 @@ export default function TodoList() {
           className="border-b-[2px] border-[#ff7945] text-slate-800 w-[90%] outline-none rounded-md px-3 py-1"
           placeholder="Add task"
           value={todo}
-          onChange={(e) => addTodoInput(e)}
+          onChange={(e) => setTodo(e.target.value)}
           ref={inputRef}
           onKeyDown={(e) => addTodoKeyDown(e)}
         />
@@ -66,11 +68,11 @@ export default function TodoList() {
           Add
         </button>
       </div>
-      <ListItems
-        tasks={tasks}
-        deleteTask={deleteTask}
-        markAsDone={markAsDone}
-      />
+      <ListItems tasks={tasks} deleteTask={deleteTask} markDone={markDone} />
+
+      <h3 className="text-black mt-5 ms-2 font-semibold">
+        You have {tasks.length} tasks maniga!
+      </h3>
     </div>
   );
 }
